@@ -1,14 +1,17 @@
-# 🎵 YouTube to MP3 Converter (C++)
+# 🎵 YouTube Downloader (MP3 & MP4) (C++)
 
-A lightweight, cross-platform command-line tool written in C++ that downloads and converts YouTube videos to high-quality MP3 audio files using [`yt-dlp`](https://github.com/yt-dlp/yt-dlp) and [`FFmpeg`](https://ffmpeg.org/).
+A lightweight, cross-platform command-line tool written in C++ that downloads YouTube audio (MP3) or video (MP4 in highest quality) using [`yt-dlp`](https://github.com/yt-dlp/yt-dlp) and [`FFmpeg`](https://ffmpeg.org/).
 
 ---
 
 ## 🚀 Features
 
-- **Highest Audio Quality**: Extracts best available audio and encodes at best quality (`--audio-quality 0` / VBR ~320kbps).
+- **Dual Format Support**: Choose between high-quality **MP3 audio** or best quality **MP4 video**.
+- **Highest Audio & Video Quality**:
+  - MP3: Extracts best available audio (`--audio-quality 0` / VBR ~320kbps).
+  - MP4: Downloads highest available resolution (1080p, 4K, etc.) and merges video with audio seamlessly.
 - **Cross-Platform Ready**: Works on Windows, Linux, and macOS with platform-aware command execution.
-- **Simple & Interactive**: Paste the link and let the program handle extraction and conversion.
+- **Simple & Interactive**: Paste the link, pick your format (MP3/MP4), and download.
 - **Portable on Windows**: Includes pre-configured binaries (`yt-dlp.exe` and `ffmpeg.exe`) for out-of-the-box usage.
 
 ---
@@ -50,7 +53,7 @@ g++ -O3 main.cpp -o main.exe
 
 ### Linux / macOS (g++ / Clang)
 ```bash
-g++ -O3 main.cpp -o youtube-to-mp3
+g++ -O3 main.cpp -o youtube-downloader
 ```
 
 ---
@@ -64,21 +67,26 @@ g++ -O3 main.cpp -o youtube-to-mp3
      ```
    - **Linux / macOS**:
      ```bash
-     ./youtube-to-mp3
+     ./youtube-downloader
      ```
 
-2. **Enter the YouTube link**:
+2. **Enter link and select format**:
    ```text
    ====================================
-      YouTube to MP3 Converter (C++)  
+      YouTube Downloader (MP3 / MP4)   
    ====================================
 
    Paste the YouTube link here: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+   Select Download Format:
+   1. MP3 (Audio Only)
+   2. MP4 (Video)
+   Enter choice (1 or 2): 2
    ```
 
 3. **Output**:
-   - The tool will download and convert the stream into `.mp3`.
-   - The resulting MP3 file is saved directly in the working directory.
+   - The tool will download the stream in your selected format (`.mp3` or `.mp4`).
+   - The downloaded file is saved directly in the current working directory.
 
 ---
 
@@ -89,7 +97,7 @@ Youtube-To-MP3/
 ├── main.cpp         # Main C++ application source code
 ├── main.exe         # Compiled Windows executable
 ├── yt-dlp.exe       # yt-dlp Windows binary
-├── ffmpeg.exe       # FFmpeg audio conversion engine
+├── ffmpeg.exe       # FFmpeg multimedia processing engine
 ├── ffprobe.exe      # Multimedia stream analyzer
 ├── ffplay.exe       # Media player binary
 └── README.md        # Project documentation
@@ -107,7 +115,7 @@ Youtube-To-MP3/
   # Linux / macOS
   yt-dlp -U
   ```
-- **Conversion Fails**: Ensure `ffmpeg` is installed and reachable either in the same directory or via your system's `PATH`.
+- **Conversion / Merging Fails**: Ensure `ffmpeg` is installed and reachable either in the same directory or via your system's `PATH`.
 
 ---
 

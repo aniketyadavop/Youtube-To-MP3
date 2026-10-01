@@ -6,9 +6,10 @@ using namespace std;
 
 int main() {
     string url;
+    int choice = 0;
 
     cout << "====================================\n";
-    cout << "   YouTube to MP3 Converter (C++)  \n";
+    cout << "   YouTube Downloader (MP3 / MP4)   \n";
     cout << "====================================\n\n";
 
     cout << "Paste the YouTube link here: ";
@@ -18,21 +19,39 @@ int main() {
         cout << "No link provided. Exiting...\n";
         return 1;
     }
-    
+
+    cout << "\nSelect Download Format:\n";
+    cout << "1. MP3 (Audio Only)\n";
+    cout << "2. MP4 (Video)\n";
+    cout << "Enter choice (1 or 2): ";
+    cin >> choice;
+    cin.ignore();
+
+    string command;
     #if defined(_WIN32) || defined(_WIN64)
-        string command = "yt-dlp.exe -x --audio-format mp3 --audio-quality 0 \"" + url + "\"";
+        string ytdlp = "yt-dlp.exe";
     #else
-        string command = "yt-dlp -x --audio-format mp3 --audio-quality 0 \"" + url + "\"";
+        string ytdlp = "yt-dlp";
     #endif
 
-    cout << "\nDownloading and converting to MP3...\n";
+    if (choice == 1) {
+        command = ytdlp + " -x --audio-format mp3 --audio-quality 0 \"" + url + "\"";
+        cout << "\nDownloading and converting to MP3...\n";
+    } else if (choice == 2) {
+        command = ytdlp + " -f \"bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best\" \"" + url + "\"";
+        cout << "\nDownloading MP4 Video...\n";
+    } else {
+        cout << "Invalid choice. Exiting...\n";
+        return 1;
+    }
+
     cout << "Please wait (this may take some time)...\n\n";
 
     int result = system(command.c_str());
 
     if (result == 0) {
         cout << "\n====================================\n";
-        cout << "   SUCCESS! MP3 has been downloaded.\n";
+        cout << "   SUCCESS! Download completed.\n";
         cout << "   Check the same folder.\n";
         cout << "====================================\n";
     } else {
